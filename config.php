@@ -32,21 +32,6 @@ $c['dbname']		="sqlmishi";		//数据库密码
 $c['dbcharset'] 	="utf8";			//数据库字符
 $c['dbpre']         ="xroom_";			//数据库表名前缀
 
-//设置数据表前缀
-define("QIANZHUI","xroom_");   
-
-
-
-//设置文件夹
-define("HT","guanlihoutai");
-define("SJ","mobile");
-
-//程序调试
-define("EOEEOE","off");
-if(EOEEOE=="open"){
-	if(!ini_get('display_errors')){
-		ini_set('display_errors','on');
-	}
-	error_reporting(E_ALL); 
-}
+//程序调试模式
+$c['debug'] = TRUE;  //程序调试模式开启
 ?>
