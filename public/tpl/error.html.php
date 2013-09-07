@@ -4,13 +4,13 @@ $url = !empty($url) ? $url : '';
 $time = !empty($time) ? $time : 3;
 $message = !empty($message) ? $message : '';
 $status = isset($status) ? $status : '';
-$title_msg = $status == 'error' ? $lang['title_error'] : $lang['title_success'];
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
-<title><?php echo $title_msg; ?></title>
+<meta http-equiv="refresh" content="<?php echo $time ?>; URL=<?php echo $url ?>"/>
+<title>信息提示</title>
 <style type="text/css">
 body { margin-top:150px; font: 12px/1.9 Arial, Helvetica, sans-serif; }
 #message { margin:0 auto; width:500px; text-align:center; }
@@ -34,31 +34,8 @@ if($status == 'error') {
 <div id="message">
     <div id="header"> <?php echo $message; ?> </div>
     <div id="footer">
-		<?php
-		$cur_url = empty($url) ? 'javascript:window.history.back();' : $url;
-		echo $lang['sys_one'] . $time . $lang['sys_two'] . $cur_url . $lang['sys_three'];
-		?>
+ 		页面正在跳转中，如果无法跳转请<a href="<?php echo $url ?>">点击这里</a></td>
     </div>
 </div>
-
-<script type="text/javascript">
-var int = 0, i = <?php echo $time; ?>;
-int = window.setInterval(function() {
-	i--;
-	document.getElementById('time').innerHTML = i;
-	if(i == 0) {
-		window.clearInterval(int);
-		<?php
-		// 如果 $url 为空，跳转到上一页，否则跳转到指定的页面
-		if(empty($url)) {
-			echo 'window.history.back();';
-		} else {
-			echo 'window.location.href = "'.$url.'";';
-		}
-		?>
-	}
-}, 1000);
-</script>
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-if(!defined('IN_WEIZE')) { exit('Access Denied'); }
+if(!defined('ACCESS')) { exit('Access Denied'); }
 $message = !empty($message) ? $message : '';
 ?>
 <!DOCTYPE HTML>
