@@ -3,9 +3,9 @@
  +----------------------------------------------------------------------
  | MythPHP框架 [佛山市德信创易网络有限公司]
  +----------------------------------------------------------------------
- | Copyright (c) 2013 - 2113 http://www.dexinnet.com All rights reserved.
+ | Copyright (c) 2013 - 2063 http://www.dexinnet.com All rights reserved.
  +----------------------------------------------------------------------
- | Author: 李勇 <e-mail:myth@dexinnet.com> <QQ:5849963>
+ | Author: 李勇 <E-mail:myth@dexinnet.com> <QQ:5849963>
  +----------------------------------------------------------------------
  | 文件功能：框架核心引用文件
  +----------------------------------------------------------------------
@@ -44,6 +44,72 @@ if($c['debug']==TRUE){
 	error_reporting(E_ALL); 
 }
 
-//
+//+---------------------------------------------------------------
+//| 类模块挂钩
+//+---------------------------------------------------------------
+function __autoload($class_name) {
+	$ext = ROOT.'/lib/extends/'.$class_name.'.class.php';
+	$lib = ROOT.'/lib/'.$class_name.'.class.php';
+	if(file_exists($ext)) {
+		include $ext;
+	} elseif(file_exists($lib)) {
+		include $lib;
+	}
+}
 
+//+---------------------------------------------------------------
+//| 信息提示（需要配合success.html.php/error.html.php/error_404.html.php使用）
+//+---------------------------------------------------------------
+//| @param string $message 提示信息内容
+//| @param string $time 多少秒跳转，默认3秒
+//| @param int $url 跳转地址
+//+---------------------------------------------------------------
+//| @Location $url
+//+---------------------------------------------------------------
+function success($message, $url = '', $time = 3) {
+	$status = 'success';
+	include ROOT.'/public/tpl/error.html.php';
+	exit;
+}
+function error($message, $url = '', $time = 3) {
+	$status = 'error';
+	include ROOT.'/public/tpl/error.html.php';
+	exit;
+}
+function error_404($message) {
+	include ROOT.'/public/tpl/error_404.html.php';
+	exit;
+}
+
+//+---------------------------------------------------------------
+//| 实例化默认需要加载的类
+//+---------------------------------------------------------------
+__autoload('mysql');
+__autoload('common');
+$db = new common($c['dbhost'], $c['dbuser'], $c['dbpw'], $c['dbname'], "", $c['dbcharset']);
+
+//+---------------------------------------------------------------
+//| 模块加载
+//+---------------------------------------------------------------
+$a = $db->get('a') == '' ? 'index' : $db->get('a');
+$a_file = ROOT.'/'.APP.'/'.$a.'.php';
+
+if(!file_exists($a_file)) {
+	error_404('The requested page was not found on this server!'); // 模块操作文件找不到
+} else {
+	// 开启缓冲
+	ob_start();
+	
+	// 加载模块操作文件
+	require_once $a_file;
+	
+	$content = '';
+	$content = ob_get_contents();
+	
+	// 清空（擦除）缓冲区并关闭输出缓冲
+	ob_end_clean();
+	
+	// 输出内容
+	echo $content;
+}
  ?>
