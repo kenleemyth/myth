@@ -16,12 +16,48 @@ class common extends mysql{
 	//重置get属性和过滤
 	function get($str){
 		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
-
-		return $val; 
+		$val = $this->safechk($val,'get');
+		return $val;
 	}
 
 	//重置post属性
+	function post($str){
+		$val = !empty($_POST[$str]) ? $_POST[$str] : null; 
+		$val = $this->safechk($val,'post');
+		return $val; 
+	}
 
+	//重置Cookie
+	function cookie($str){
+		$val = !empty($_COOKIE[$str]) ? $_COOKIE[$str] : null; 
+		$val = $this->safechk($val,'cookie');
+		return $val; 
+	}
+
+	//安全性检测
+	function safechk($value,$type){
+		$getfilter = "'|(and|or)\\b.+?(>|<|=|in|like)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+		$postfilter = "\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+		$cookiefilter = "\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+		switch ($type) {
+			case 'get':
+				$req=$getfilter;
+				break;
+			case 'post':
+				$req=$postfilter;
+				break;
+			case 'cookie':
+				$req=$cookiefilter;
+				break;
+		}
+		//开始检测
+        if (preg_match("/".$req."/is",$value) == 1){  
+        	error("请勿提交非法信息！","http://www.wogoule.com");
+        }else{
+        	return $value;
+        }
+
+	}
 
 	/*获得客户端真实的IP地址*/
 	function getip() {
