@@ -86,7 +86,7 @@ function error_404($message) {
 //+---------------------------------------------------------------
 __autoload('mysql');
 __autoload('common');
-$db = new common($c['dbhost'], $c['dbuser'], $c['dbpw'], $c['dbname'], "", $c['dbcharset']);
+$db = new common ();
 
 //+---------------------------------------------------------------
 //| 模块加载
