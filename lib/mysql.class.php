@@ -27,7 +27,7 @@ class mysql {
 	private $is_error = false; //发现错误是否立即终止,默认true,建议不启用，因为当有问题时用户什么也看不到是很苦恼的
 
 	/*构造函数*/
-	public function __construct($db_host, $db_user, $db_pwd, $db_database, $conn, $coding) {
+	public function __construct($c['dbhost'], $c['dbuser'],$c['dbpw'], $c['dbname'], 'conn', $c['dbcharset']) {
 		$this->db_host = $db_host;
 		$this->db_user = $db_user;
 		$this->db_pwd = $db_pwd;
