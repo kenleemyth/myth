@@ -1,3 +1,4 @@
 <?php
-echo $db->get('abc');
+
+include('tpl/index.php');
 ?>
