@@ -1,4 +1,4 @@
 <?php
-define('APP','Home');
+define('APP','home');
 include('myth.php');
 ?>

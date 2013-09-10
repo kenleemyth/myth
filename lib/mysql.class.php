@@ -27,13 +27,13 @@ class mysql {
 	private $is_error = false; //发现错误是否立即终止,默认true,建议不启用，因为当有问题时用户什么也看不到是很苦恼的
 
 	/*构造函数*/
-	public function __construct($c['dbhost'], $c['dbuser'],$c['dbpw'], $c['dbname'], 'conn', $c['dbcharset']) {
-		$this->db_host = $db_host;
-		$this->db_user = $db_user;
-		$this->db_pwd = $db_pwd;
-		$this->db_database = $db_database;
-		$this->conn = $conn;
-		$this->coding = $coding;
+	public function __construct() {
+		$this->db_host = $GLOBALS['c']['dbhost'];
+		$this->db_user = $GLOBALS['c']['dbuser'];
+		$this->db_pwd = $GLOBALS['c']['dbpw'];
+		$this->db_database = $GLOBALS['c']['dbname'];
+		$this->conn = 'conn';
+		$this->coding = $GLOBALS['c']['dbcharset'];
 		$this->connect();
 	}
 

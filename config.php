@@ -14,34 +14,34 @@
 
 defined('ACCESS')||exit('Access Denied');
 
-$c = array();
+$GLOBALS['c'] = array();
 
 //版本信息号
-$c['version'] = "MythPHP1.0"; //系统版本号
+$GLOBALS['c']['version'] = "MythPHP1.0"; //系统版本号
 
 //session和时区设置
-$c['session']  = TRUE; // TRUE为开启, FALSE为关闭
-$c['timezone'] = 'Asia/Hong_Kong'; // 时区 PRC
+$GLOBALS['c']['session']  = TRUE; // TRUE为开启, FALSE为关闭
+$GLOBALS['c']['timezone'] = 'Asia/Hong_Kong'; // 时区 PRC
 
 
 //数据库配置
-$c['dbhost']        = "localhost";		//配置主机
-$c['dbuser']		= "root";			//数据库用户
-$c['dbpw']			= "";		//数据库密码
-$c['dbname']		= "wogoule";		//数据库密码
-$c['dbcharset'] 	= "utf8";			//数据库字符
-$c['dbpre']         = "wgl_";			//数据库表名前缀
+$GLOBALS['c']['dbhost']        = "localhost";		//配置主机
+$GLOBALS['c']['dbuser']		= "root";			//数据库用户
+$GLOBALS['c']['dbpw']			= "";		//数据库密码
+$GLOBALS['c']['dbname']		= "wogoule";		//数据库密码
+$GLOBALS['c']['dbcharset'] 	= "utf8";			//数据库字符
+$GLOBALS['c']['dbpre']         = "wgl_";			//数据库表名前缀
 
 //配置邮件发送设置
-$c['SMTP_HOST']	=	"";  //发信主机
-$c['SMTP_NAME']	=	"";	 //发信账号
-$c['SMTP_PASS']	=	"";	 //发信密码
-$c['SMTP_FROM']	=	"";	 //发信人
+$GLOBALS['c']['SMTP_HOST']	=	"";  //发信主机
+$GLOBALS['c']['SMTP_NAME']	=	"";	 //发信账号
+$GLOBALS['c']['SMTP_PASS']	=	"";	 //发信密码
+$GLOBALS['c']['SMTP_FROM']	=	"";	 //发信人
 
 //短信设置
-$c['SMS_NAME']		=	"";   //短信账号
-$c['SMS_PASS']		=	"";	  //短信密码	
+$GLOBALS['c']['SMS_NAME']		=	"";   //短信账号
+$GLOBALS['c']['SMS_PASS']		=	"";	  //短信密码	
 
 //程序调试模式
-$c['debug'] = TRUE;  //程序调试模式开启
+$GLOBALS['c']['debug'] = TRUE;  //程序调试模式开启
 ?>
